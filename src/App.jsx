@@ -29,7 +29,31 @@ function App() {
     }
   }, [coords])
 
-  console.log(weather)
+  function temp(params) {
+    const tempK = params?.main.temp;
+    const tempC = (tempK - 273.15).toFixed(1)
+    const tempF = ((((tempK - 273.15)*(9))/5)+32).toFixed(1)
+    
+    const tempKMin = params?.main.temp_min;
+    const tempCMin = (tempKMin - 273.15).toFixed(1)
+    const tempFMin = ((((tempKMin- 273.15)*(9))/5)+32).toFixed(1) 
+
+    const tempKMax = params?.main.temp_max;
+    const tempCMax = (tempKMax- 273.15).toFixed(1)
+    const tempFMax = ((((tempKMax - 273.15)*(9))/5)+32).toFixed(1)
+    
+    const tempKFL = params?.main.feels_like;
+    const tempCFL = (tempKFL- 273.15).toFixed(1)
+    const tempFFL = ((((tempKFL - 273.15)*(9))/5)+32).toFixed(1)
+
+    return {tempC, tempCMin, tempCMax, tempF, tempFMin, tempFMax, tempCFL, tempFFL}
+  }
+  
+  const tempG = temp(weather)
+  console.log(tempG.tempC, tempG.tempCMin, tempG.tempCMax)
+
+// console.log(weather)
+
   
   return (
     <>
@@ -38,7 +62,7 @@ function App() {
         <div className='container_home'>
           <div className='container_home_icon'></div>
           <div className='container_home_temp'>
-            <p className='home_temp_p1'>25.1</p>
+            <p className='home_temp_p1'>{tempG.tempC}</p>
             <p className='home_temp_p2'>°C</p>
           </div>
           {/* --------------------- */}
@@ -46,7 +70,7 @@ function App() {
             <div className='container_home_temp_min'>
               <p className='tmin_title'>T. Mínima</p>
               <div className='tmin_container'>
-                <p className='tmin_value'>18.1</p>
+                <p className='tmin_value'>{tempG.tempCMin}</p>
                 <p className='tmin_units'>°C</p>
               </div>
             </div>
@@ -54,7 +78,7 @@ function App() {
             <div className='container_home_temp_max'>
               <p className='tmax_title'>T. Máxima</p>
               <div className='tmax_container'>
-                <p className='tmax_value'>25.1</p>
+                <p className='tmax_value'>{tempG.tempCMax}</p>
                 <p className='tmax_units'>°C</p>
               </div>
             </div>
@@ -70,8 +94,8 @@ function App() {
           <div className='container_home_location'>
             <div className='home_location_image'></div>
             <div className='home_location_location'>
-              <p className='home_location_title'>Yanacocha,</p>
-              <p className='home_location_reg'>&nbsp;EC</p>
+              <p className='home_location_title'>{weather?.name}</p>
+              <p className='home_location_reg'>&nbsp;{weather?.sys.country}</p>
             </div>
           </div>
         </div>
@@ -93,7 +117,7 @@ function App() {
                 <h1>Confort</h1>
               </div>
               <div className='feels_like_contain'>
-                <p className='feels_like_contain_p1'>20.5</p>
+                <p className='feels_like_contain_p1'>{tempG.tempCFL}</p>
                 <p className='feels_like_contain_p2'>&nbsp;°C</p>
               </div>
               <div className='feels_like_bottom'>
@@ -112,7 +136,7 @@ function App() {
                 <h1>Humedad</h1>
               </div>
               <div className='humidity_contain'>
-                <p className='humidity_contain_p1'>78</p>
+                <p className='humidity_contain_p1'>{weather?.main.humidity}</p>
                 <p className='humidity_contain_p2'>&nbsp;%</p>
               </div>
               <div className='humidity_bottom'>
@@ -129,7 +153,7 @@ function App() {
                 <h1>Presión</h1>
               </div>
               <div className='pressure_contain'>
-                <p className='pressure_contain_p1'>101.5</p>
+                <p className='pressure_contain_p1'>{weather?.main.pressure}</p>
                 <p className='pressure_contain_p2'>&nbsp;hPa</p>
               </div>
               <div className='pressure_bottom'>
@@ -146,7 +170,7 @@ function App() {
                 <h1>Precipitación</h1>
               </div>
               <div className='rain_contain'>
-                <p className='rain_contain_p1'>0.72</p>
+                <p className='rain_contain_p1'>{weather?.rain['1h']}</p>
                 <p className='rain_contain_p2'>&nbsp;mm/h</p>
               </div>
               <div className='rain_bottom'>
@@ -160,16 +184,16 @@ function App() {
             {/* -------Card 5------- */}
             <div className='container_info_grid_moderate_rain'>
               <div className='moderate_rain_title'>
-                <h1>Estado</h1>
+                <h1>Altitud</h1>
               </div>
               <div className='moderate_rain_contain'>
-                <p className='moderate_rain_contain_p1'>lluvia ligera</p>
-                {/* <p className='moderate_rain_contain_p2'></p> */}
+                <p className='moderate_rain_contain_p1'>{weather?.main.sea_level}</p>
+                <p className='moderate_rain_contain_p2'>m</p>
               </div>
               <div className='moderate_rain_bottom'>
-                <div className='moderate_rain_bottom_1'><i class="fa-solid fa-sign-hanging"></i></div>
+                <div className='moderate_rain_bottom_1'><i class="fa-solid fa-mountain"></i></div>
                 <div className='moderate_rain_bottom_2'>
-                  <h2 className='moderate_rain_bottom_2_description'>Estado Actual</h2>
+                  <h2 className='moderate_rain_bottom_2_description'>Altitud sobre nivel del mar</h2>
                 </div>
               </div>
             </div>
@@ -180,7 +204,17 @@ function App() {
               <h1>Viento</h1>
               </div>
               <div className='moderate_wind_contain'>
-                <p>1.04 m/s</p>
+                <div className='moderate_wind_contain_data'>
+                  <p className='wind_contain_data_p1'>{weather?.wind.speed}</p>
+                  <p className='wind_contain_data_p2'>m/s</p>
+                </div>
+                <div className='moderate_wind_contain_generator'>
+                  <div className="aero_container_1"></div>
+                  <div className="aero_container_2">
+                      <div className="img"></div>
+                  </div>
+                </div>
+                
               </div>
               <div className='moderate_wind_bottom'>
                 <div className='moderate_wind_bottom_1'><i class="fa-solid fa-wind"></i></div>
