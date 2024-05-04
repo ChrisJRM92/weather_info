@@ -23,6 +23,7 @@ function App() {
     if (coords) {
       const apiKey = 'a41a27978c86360ce8bb31ef4a45d6bb'
       const url = `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.long}&appid=${apiKey}`
+      
       axios.get(url)
       .then(res => setweather(res.data))
       .catch(err => console.log(err))
@@ -46,13 +47,23 @@ function App() {
     const tempCFL = (tempKFL- 273.15).toFixed(1)
     const tempFFL = ((((tempKFL - 273.15)*(9))/5)+32).toFixed(1)
 
-    return {tempC, tempCMin, tempCMax, tempF, tempFMin, tempFMax, tempCFL, tempFFL}
+    const zone = params?.timezone;
+    const hour = 3600;
+    const GMT = zone/hour
+    
+
+    return {tempC, tempCMin, tempCMax, tempF, tempFMin, tempFMax, tempCFL, tempFFL, GMT}
   }
   
   const tempG = temp(weather)
-  console.log(tempG.tempC, tempG.tempCMin, tempG.tempCMax)
 
-// console.log(weather)
+  const [isCelsius, setisCelsius] = useState(true)
+
+  const changeTemperature = () =>{
+    setisCelsius(!isCelsius)
+  }
+
+  console.log(isCelsius)
 
   
   return (
@@ -60,32 +71,32 @@ function App() {
       {/* --------Contenedor principal------------- */}
       <div className='container'>
         <div className='container_home'>
-          <div className='container_home_icon'></div>
+          <div className='container_home_icon'><img src={`https://openweathermap.org/img/wn/${weather?.weather['0'].icon}@4x.png`} alt="" /></div>
           <div className='container_home_temp'>
-            <p className='home_temp_p1'>{tempG.tempC}</p>
-            <p className='home_temp_p2'>°C</p>
+            <p className='home_temp_p1'>{isCelsius ? `${tempG.tempC}`:`${tempG.tempF}`}</p>
+            <p className='home_temp_p2'>{isCelsius ? '°C': '°F'}</p>
           </div>
           {/* --------------------- */}
           <div className='container_home_temp_minmax'>
             <div className='container_home_temp_min'>
               <p className='tmin_title'>T. Mínima</p>
               <div className='tmin_container'>
-                <p className='tmin_value'>{tempG.tempCMin}</p>
-                <p className='tmin_units'>°C</p>
+                <p className='tmin_value'>{isCelsius ? `${tempG.tempCMin}`:`${tempG.tempFMin}`}</p>
+                <p className='tmin_units'>{isCelsius ? '°C': '°F'}</p>
               </div>
             </div>
             {/* --------------------- */}
             <div className='container_home_temp_max'>
               <p className='tmax_title'>T. Máxima</p>
               <div className='tmax_container'>
-                <p className='tmax_value'>{tempG.tempCMax}</p>
-                <p className='tmax_units'>°C</p>
+                <p className='tmax_value'>{isCelsius ? `${tempG.tempCMax}`:`${tempG.tempFMax}`}</p>
+                <p className='tmax_units'>{isCelsius ? '°C': '°F'}</p>
               </div>
             </div>
           </div>
           {/* --------------------- */}
           <div className='container_home_buttom'>
-            <button className='buttom'>Cambiar a °F</button>
+            <button className='buttom' onClick={changeTemperature}>{isCelsius ? `Cambiar a °F`:`Cambiar a °C`}</button>
           </div>
           <div className='container_home_hr'>
             <hr />
@@ -106,9 +117,10 @@ function App() {
             <div className='title'>
               <p>Estado del clima</p>
             </div>
-            <div className='author'>
-              ---
-            </div>
+            <a className='author' href="https://christianromero.netlify.app/#home" target='_post' >
+              <p className='nameAuthor'>Christian R. |&nbsp;</p>
+              <div className='profile'></div>
+            </a>
           </div>
           <div className='container_info_grid'>
             {/* -------Card 1------- */}
@@ -117,15 +129,31 @@ function App() {
                 <h1>Confort</h1>
               </div>
               <div className='feels_like_contain'>
-                <p className='feels_like_contain_p1'>{tempG.tempCFL}</p>
-                <p className='feels_like_contain_p2'>&nbsp;°C</p>
+                <p className='feels_like_contain_p1'>{isCelsius ? `${tempG.tempCFL}`:`${tempG.tempFFL}`}</p>
+                <p className='feels_like_contain_p2'>&nbsp;{isCelsius ? '°C': '°F'}</p>
               </div>
               <div className='feels_like_bottom'>
                 <div className='feels_like_bottom_1'>
-                  <p>🙂</p>
+                  <p>
+                  {(tempG.tempC < 0) ? "Muy frío" :
+                    (tempG.tempC >= 0 && tempG.tempC < 10) ? "🥶" :
+                    (tempG.tempC>= 10 && tempG.tempC < 20) ? "😌" :
+                    (tempG.tempC >= 20 && tempG.tempC < 25) ? "🙂" :
+                    (tempG.tempC>= 25 && tempG.tempC < 30) ? "😎" :
+                    (tempG.tempC >= 30 && tempG.tempC < 35) ? "🥵" :
+                    "🫠"}
+                  </p>
                 </div>
                 <div className='feels_like_bottom_2'>
-                  <h2 className='feels_like_bottom_2_description'>Temperatura confortable</h2>
+                  <h2 className='feels_like_bottom_2_description'>
+                    {(tempG.tempC < 0) ? "Muy frío" :
+                    (tempG.tempC >= 0 && tempG.tempC < 10) ? "El clima es frío" :
+                    (tempG.tempC>= 10 && tempG.tempC < 20) ? "El clima es Fresco" :
+                    (tempG.tempC >= 20 && tempG.tempC < 25) ? "El clima es confortable" :
+                    (tempG.tempC>= 25 && tempG.tempC < 30) ? "El clima es cálido" :
+                    (tempG.tempC >= 30 && tempG.tempC < 35) ? "El clima es caluroso" :
+                    "El clima es sofocante"}
+                  </h2>
                 </div>
               </div>
             </div>
@@ -140,7 +168,7 @@ function App() {
                 <p className='humidity_contain_p2'>&nbsp;%</p>
               </div>
               <div className='humidity_bottom'>
-                <div className='humidity_bottom_1'><i class="fa-solid fa-droplet"></i></div>
+                <div className='humidity_bottom_1'><i className="fa-solid fa-droplet"></i></div>
                 <div className='humidity_bottom_2'>
                   <h2 className='humidity_bottom_2_description'>Humedad Relativa</h2>
                 </div>
@@ -157,7 +185,7 @@ function App() {
                 <p className='pressure_contain_p2'>&nbsp;hPa</p>
               </div>
               <div className='pressure_bottom'>
-                <div className='pressure_bottom_1'><i class="fa-solid fa-ruler-vertical"></i></div>
+                <div className='pressure_bottom_1'><i className="fa-solid fa-ruler-vertical"></i></div>
                 <div className='pressure_bottom_2'>
                   <h2 className='pressure_bottom_2_description'>Presión Atmosferica</h2>
                 </div>
@@ -174,7 +202,7 @@ function App() {
                 <p className='rain_contain_p2'>&nbsp;mm/h</p>
               </div>
               <div className='rain_bottom'>
-                <div className='rain_bottom_1'><i class="fa-solid fa-cloud-showers-heavy"></i></div>
+                <div className='rain_bottom_1'><i className="fa-solid fa-cloud-showers-heavy"></i></div>
                 <div className='rain_bottom_2'>
                   <h2 className='rain_bottom_2_description'>Precipitación esperada</h2>
                 </div>
@@ -184,16 +212,16 @@ function App() {
             {/* -------Card 5------- */}
             <div className='container_info_grid_moderate_rain'>
               <div className='moderate_rain_title'>
-                <h1>Altitud</h1>
+                <h1>Zona actual</h1>
               </div>
               <div className='moderate_rain_contain'>
-                <p className='moderate_rain_contain_p1'>{weather?.main.sea_level}</p>
-                <p className='moderate_rain_contain_p2'>m</p>
+                <p className='moderate_rain_contain_p1'>GMT{tempG.GMT}</p>
+                <p className='moderate_rain_contain_p2'></p>
               </div>
               <div className='moderate_rain_bottom'>
-                <div className='moderate_rain_bottom_1'><i class="fa-solid fa-mountain"></i></div>
+                <div className='moderate_rain_bottom_1'><i className="fa-solid fa-globe"></i></div>
                 <div className='moderate_rain_bottom_2'>
-                  <h2 className='moderate_rain_bottom_2_description'>Altitud sobre nivel del mar</h2>
+                  <h2 className='moderate_rain_bottom_2_description'>Zona horaria actual</h2>
                 </div>
               </div>
             </div>
@@ -217,7 +245,7 @@ function App() {
                 
               </div>
               <div className='moderate_wind_bottom'>
-                <div className='moderate_wind_bottom_1'><i class="fa-solid fa-wind"></i></div>
+                <div className='moderate_wind_bottom_1'><i className="fa-solid fa-wind"></i></div>
                 <div className='moderate_wind_bottom_2'>
                   <h2 className='moderate_wind_bottom_2_description'>Velocidad del viento</h2>
                 </div>
@@ -225,17 +253,11 @@ function App() {
             </div>
           </div>
 
-          <div className='container_info_desing'></div>
+          <div className='container_info_desing'>
+            <p>Diseño UI/UX &nbsp;</p><a href="https://dribbble.com/mikhaltsov23" target='_post'>Dribbble - Anton Mihalcov&nbsp;</a>
+          </div>
         </div>
       </div>
-      {/* <h1>Clima actual</h1>
-      <h2>{weather.name} {weather.sys.country}</h2>
-      <img src="" alt="" />
-      <h3>estado</h3>
-      <p>velocidad del viento</p><p>0.00</p><p>m/s</p>
-      <p>nubes</p><p>00</p><p>%</p>
-      <p>presion</p><p>0000</p><p>hPa</p>
-      <h2>00.0</h2><p>hpa</p> */}
     </>
   )
 }
