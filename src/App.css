@@ -44,13 +44,27 @@ body{
         .container_home_icon{
             width: 100%;
             height: 150px;
-            background-color: aqua;
+            /* background-color: aqua; */
         }
 
         .container_home_temp{
             width: 100%;
-            height: 50px;
-            background-color: antiquewhite;
+            height: 55px;
+            /* background-color: antiquewhite; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .home_temp_p1{
+                margin: 0;
+                font-size: 50px;
+            }
+
+            .home_temp_p2{
+                margin: 0;
+                font-size: 20px;
+                align-self: flex-start;
+            }
         }
 
         .container_home_temp_minmax{
@@ -61,13 +75,75 @@ body{
             .container_home_temp_min{
                 width: 50%;
                 height: 100%;
-                background-color: blueviolet;
+                /* background-color: blueviolet; */
+                display: flex;
+                flex-direction: column;
+
+                .tmin_title{
+                    margin: 0;
+                    font-size: 10px;
+                    color: gray;
+                    /* background-color: aquamarine; */
+                    padding-left: 5px;
+                }
+
+                .tmin_container{
+                    /* background-color: rgb(101, 60, 211); */
+                    display: flex;
+                    justify-content: center;
+
+                    .tmin_value{
+                        margin: 0;
+                        font-size: 25px;
+                        /* color: #696969; */
+                        font-weight: 300;
+                        /* background-color: aqua; */
+                    }
+
+                    .tmin_units{
+                        margin: 0;
+                        font-size: 10px;
+                        padding-top: 5px;
+                        /* background-color: rgb(251, 255, 207); */
+                    }
+                }
             }
 
             .container_home_temp_max{
                 width: 50%;
                 height: 100%;
-                background-color: chartreuse;
+                /* background-color: chartreuse; */
+                display: flex;
+                flex-direction: column;
+
+                .tmax_title{
+                    margin: 0;
+                    font-size: 10px;
+                    color: gray;
+                    /* background-color: aquamarine; */
+                    padding-left: 5px;
+                }
+
+                .tmax_container{
+                    /* background-color: rgb(101, 60, 211); */
+                    display: flex;
+                    justify-content: center;
+
+                    .tmax_value{
+                        margin: 0;
+                        font-size: 25px;
+                        /* color: #696969; */
+                        font-weight: 300;
+                        /* background-color: aqua; */
+                    }
+
+                    .tmax_units{
+                        margin: 0;
+                        font-size: 10px;
+                        padding-top: 5px;
+                        /* background-color: rgb(251, 255, 207); */
+                    }
+                }
             }
         }
 
@@ -75,18 +151,71 @@ body{
             display: flex;
             justify-content: center;
             width: 100%;
-            background-color: burlywood;
+            /* background-color: burlywood; */
+
+            .buttom{
+                border-radius: 7px;
+                border-style: solid;
+                border-color: #3D3D3D;
+                background-color: #3D3D3D;
+                color: #ffffff;
+
+                &&:hover{
+                    border-style: solid;
+                    border-width: 2px;
+                    border-color: #4F6FFF;
+                    cursor: pointer;
+                    
+                }
+
+                &&:active{
+                    background-color: #4F6FFF;
+                }
+            }
         }
 
         .container_home_hr{
             width: 100%;
-            background-color: aliceblue;
+            padding-left: 5px;
+            padding-right: 5px;
+            /* background-color: aliceblue; */
         }
 
         .container_home_location{
             width: 100%;
-            height: auto;
-            background-color: blue;
+            height: 20%;
+            /* background-color: blue; */
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+
+
+            .home_location_image{
+                grid-area: 1 / 1 / 2 / 2;
+                background-image: url(assets/city_back.jpg);
+                background-size: cover;
+                border-radius: 10px;
+            }
+
+            .home_location_location{
+                grid-area: 1 / 1 / 2 / 2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+                .home_location_title{
+                    margin: 0;
+                    color: #ffffff;
+                }
+
+                .home_location_reg{
+                    margin: 0;
+                    color: #ffffff;
+                }
+            }
+
         }
     }
 
@@ -313,31 +442,56 @@ body{
                 .pressure_contain{
                     width: var(--width-container);
                     height: 55%;
-                    background-color: burlywood;
+                    /* background-color: burlywood; */
+                    display: flex;
+                    align-items: center;
 
-                    p{
-                        margin: 0
-                    };
+
+                    .pressure_contain_p1{
+                        margin: 0;
+                        font-weight: 400;
+                        font-size: 25px;
+                    }
+
+                    .pressure_contain_p2{
+                        margin: 0;
+                        font-weight: 600;
+                        font-size: 10px;
+                        align-self: flex-start;
+                        padding-top: 18px;
+                    }
                 }
 
                 .pressure_bottom{
                     width: var(--width-container);
                     height: 25%;
-                    background-color: rgb(255, 129, 129);
+                    /* background-color: rgb(255, 129, 129); */
                     display: flex;
 
                     .pressure_bottom_1{
                         width: 25%;
                         height: 100%;
-                        background-color: coral;
+                        /* background-color: c  oral; */
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        i{
+                            color: gray;
+                            font-size: 15px;
+                        }
                     }
 
                     .pressure_bottom_2{
                         width: 75%;
+                        display: flex;
+                        align-items: center;
 
                         .pressure_bottom_2_description{
                             font-size: 8px;
+                            font-weight: 500;
                             margin: 0;
+                            padding-left: 5px;
                         }
                     }
                 }
@@ -366,31 +520,56 @@ body{
                 .rain_contain{
                     width: var(--width-container);
                     height: 55%;
-                    background-color: burlywood;
+                    /* background-color: burlywood; */
+                    display: flex;
+                    align-items: center;
 
-                    p{
-                        margin: 0
-                    };
+
+                    .rain_contain_p1{
+                        margin: 0;
+                        font-weight: 400;
+                        font-size: 25px;
+                    }
+
+                    .rain_contain_p2{
+                        margin: 0;
+                        font-weight: 600;
+                        font-size: 10px;
+                        align-self: flex-start;
+                        padding-top: 18px;
+                    }
                 }
 
                 .rain_bottom{
                     width: var(--width-container);
                     height: 25%;
-                    background-color: rgb(189, 227, 66);
+                    /* background-color: rgb(189, 227, 66); */
                     display: flex;
 
                     .rain_bottom_1{
                         width: 25%;
                         height: 100%;
-                        background-color: coral;
+                        /* background-color: c  oral; */
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        i{
+                            color: gray;
+                            font-size: 15px;
+                        }
                     }
 
                     .rain_bottom_2{
                         width: 75%;
+                        display: flex;
+                        align-items: center;
 
                         .rain_bottom_2_description{
                             font-size: 8px;
+                            font-weight: 500;
                             margin: 0;
+                            padding-left: 5px;
                         }
                     }
                 }
@@ -419,31 +598,55 @@ body{
                 .moderate_rain_contain{
                     width: var(--width-container);
                     height: 55%;
-                    background-color: burlywood;
+                    /* background-color: burlywood; */
+                    display: flex;
+                    align-items: center;
 
-                    p{
-                        margin: 0
-                    };
+                    .moderate_rain_contain_p1{
+                        margin: 0;
+                        font-weight: 400;
+                        font-size: 18px;
+                    }
+
+                    /* .moderate_rain_contain_p2{
+                        margin: 0;
+                        font-weight: 600;
+                        font-size: 10px;
+                        align-self: flex-start;
+                        padding-top: 18px;
+                    } */
                 }
 
                 .moderate_rain_bottom{
                     width: var(--width-container);
                     height: 25%;
-                    background-color: rgb(162, 250, 164);
+                    /* background-color: rgb(162, 250, 164); */
                     display: flex;
 
                     .moderate_rain_bottom_1{
                         width: 25%;
                         height: 100%;
-                        background-color: coral;
+                        /* background-color: c  oral; */
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        i{
+                            color: gray;
+                            font-size: 15px;
+                        }
                     }
 
                     .moderate_rain_bottom_2{
                         width: 75%;
+                        display: flex;
+                        align-items: center;
 
                         .moderate_rain_bottom_2_description{
                             font-size: 8px;
+                            font-weight: 500;
                             margin: 0;
+                            padding-left: 5px;
                         }
                     }
                 }
@@ -482,21 +685,34 @@ body{
                 .moderate_wind_bottom{
                     width: var(--width-container);
                     height: 25%;
-                    background-color: rgb(217, 112, 255);
+                    /* background-color: rgb(217, 112, 255); */
                     display: flex;
+                    align-items: center;
 
                     .moderate_wind_bottom_1{
                         width: 25%;
                         height: 100%;
-                        background-color: coral;
+                        /* background-color: c  oral; */
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        i{
+                            color: gray;
+                            font-size: 15px;
+                        }
                     }
 
                     .moderate_wind_bottom_2{
                         width: 75%;
+                        display: flex;
+                        align-items: center;
 
                         .moderate_wind_bottom_2_description{
                             font-size: 8px;
+                            font-weight: 500;
                             margin: 0;
+                            padding-left: 5px;
                         }
                     }
                 

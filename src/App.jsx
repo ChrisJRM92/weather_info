@@ -37,19 +37,45 @@ function App() {
       <div className='container'>
         <div className='container_home'>
           <div className='container_home_icon'></div>
-          <div className='container_home_temp'></div>
-          <div className='container_home_temp_minmax'>
-            <div className='container_home_temp_min'></div>
-            <div className='container_home_temp_max'></div>
+          <div className='container_home_temp'>
+            <p className='home_temp_p1'>25.1</p>
+            <p className='home_temp_p2'>°C</p>
           </div>
-          <div className='container_home_buttom'><button>Boton</button></div>
+          {/* --------------------- */}
+          <div className='container_home_temp_minmax'>
+            <div className='container_home_temp_min'>
+              <p className='tmin_title'>T. Mínima</p>
+              <div className='tmin_container'>
+                <p className='tmin_value'>18.1</p>
+                <p className='tmin_units'>°C</p>
+              </div>
+            </div>
+            {/* --------------------- */}
+            <div className='container_home_temp_max'>
+              <p className='tmax_title'>T. Máxima</p>
+              <div className='tmax_container'>
+                <p className='tmax_value'>25.1</p>
+                <p className='tmax_units'>°C</p>
+              </div>
+            </div>
+          </div>
+          {/* --------------------- */}
+          <div className='container_home_buttom'>
+            <button className='buttom'>Cambiar a °F</button>
+          </div>
           <div className='container_home_hr'>
             <hr />
           </div>
+          {/* --------------------- */}
           <div className='container_home_location'>
-            <h1>Ciudad</h1>
+            <div className='home_location_image'></div>
+            <div className='home_location_location'>
+              <p className='home_location_title'>Yanacocha,</p>
+              <p className='home_location_reg'>&nbsp;EC</p>
+            </div>
           </div>
         </div>
+
         {/* -----------Contenedor secundario----------- */}
         <div className='container_info'>
           <div className='container_info_author'>
@@ -103,12 +129,13 @@ function App() {
                 <h1>Presión</h1>
               </div>
               <div className='pressure_contain'>
-                <p>{weather?.main.feels_like} K</p>
+                <p className='pressure_contain_p1'>101.5</p>
+                <p className='pressure_contain_p2'>&nbsp;hPa</p>
               </div>
               <div className='pressure_bottom'>
-                <div className='pressure_bottom_1'></div>
+                <div className='pressure_bottom_1'><i class="fa-solid fa-ruler-vertical"></i></div>
                 <div className='pressure_bottom_2'>
-                  <h2 className='pressure_bottom_2_description'>descripción</h2>
+                  <h2 className='pressure_bottom_2_description'>Presión Atmosferica</h2>
                 </div>
               </div>
             </div>
@@ -116,15 +143,16 @@ function App() {
             {/* -------Card 4------- */}
             <div className='container_info_grid_rain'>
               <div className='rain_title'>
-                <h1>Lluvia</h1>
+                <h1>Precipitación</h1>
               </div>
               <div className='rain_contain'>
-                <p>{weather?.main.feels_like} K</p>
+                <p className='rain_contain_p1'>0.72</p>
+                <p className='rain_contain_p2'>&nbsp;mm/h</p>
               </div>
               <div className='rain_bottom'>
-                <div className='rain_bottom_1'></div>
+                <div className='rain_bottom_1'><i class="fa-solid fa-cloud-showers-heavy"></i></div>
                 <div className='rain_bottom_2'>
-                  <h2 className='rain_bottom_2_description'>descripción</h2>
+                  <h2 className='rain_bottom_2_description'>Precipitación esperada</h2>
                 </div>
               </div>
             </div>
@@ -132,15 +160,16 @@ function App() {
             {/* -------Card 5------- */}
             <div className='container_info_grid_moderate_rain'>
               <div className='moderate_rain_title'>
-                <h1>lluvia promedio</h1>
+                <h1>Estado</h1>
               </div>
               <div className='moderate_rain_contain'>
-                <p>{weather?.main.feels_like} K</p>
+                <p className='moderate_rain_contain_p1'>lluvia ligera</p>
+                {/* <p className='moderate_rain_contain_p2'></p> */}
               </div>
               <div className='moderate_rain_bottom'>
-                <div className='moderate_rain_bottom_1'></div>
+                <div className='moderate_rain_bottom_1'><i class="fa-solid fa-sign-hanging"></i></div>
                 <div className='moderate_rain_bottom_2'>
-                  <h2 className='moderate_rain_bottom_2_description'>descripción</h2>
+                  <h2 className='moderate_rain_bottom_2_description'>Estado Actual</h2>
                 </div>
               </div>
             </div>
@@ -151,12 +180,12 @@ function App() {
               <h1>Viento</h1>
               </div>
               <div className='moderate_wind_contain'>
-                <p>{weather?.main.feels_like} K</p>
+                <p>1.04 m/s</p>
               </div>
               <div className='moderate_wind_bottom'>
-                <div className='moderate_wind_bottom_1'></div>
+                <div className='moderate_wind_bottom_1'><i class="fa-solid fa-wind"></i></div>
                 <div className='moderate_wind_bottom_2'>
-                  <h2 className='moderate_wind_bottom_2_description'>descripción</h2>
+                  <h2 className='moderate_wind_bottom_2_description'>Velocidad del viento</h2>
                 </div>
               </div>
             </div>
