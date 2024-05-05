@@ -13,33 +13,44 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: #d6d7da; */
+    background-color: #e9e9e9;
     height: 100vh;
     margin: 0;
-
-    video{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        overflow: hidden;
-        background-color: #d6d7da;
-        /* background-image: url(assets/clouds.jpg); */
-        background-size: cover;
-    }
+    
     
 }
+
+.containerP{
+    position: absolute;
+    background-color: #4F6FFF;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    
+    
+}
+
+video{
+    height: 100%;
+    width: 100%;
+    transform: scale(1.5);
+    filter: blur(1.9px);
+    
+}
+
 
 /* ---------Contenedor principal----------- */
 
 .container{
     width: 625px;
     height: 420px;
-    /* background-color: blue; */
+    /* background-color: rgb(255, 0, 0); */
     display: flex;
-    position: relative;
     /* min-width: 650px; */
     overflow-x: auto;
     filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));
+    position: relative;
+    z-index: 1;
 }
 
 /* ---------Contenedor home----------- */
@@ -884,7 +895,9 @@ body{
 }
 
 @media (max-width: 650px) {
-    
+    video{
+        transform: scale(3);
+    }
     .aero_container_1{
         background-size: contain;
         background-repeat: no-repeat;

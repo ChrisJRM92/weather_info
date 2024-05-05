@@ -31,19 +31,20 @@ function App() {
   }, [coords])
 
   function temp(params) {
-    const tempK = params?.main.temp;
+ 
+    const tempK = params?.main?.temp;
     const tempC = (tempK - 273.15).toFixed(1)
     const tempF = ((((tempK - 273.15)*(9))/5)+32).toFixed(1)
     
-    const tempKMin = params?.main.temp_min;
+    const tempKMin = params?.main?.temp_min;
     const tempCMin = (tempKMin - 273.15).toFixed(1)
     const tempFMin = ((((tempKMin- 273.15)*(9))/5)+32).toFixed(1) 
 
-    const tempKMax = params?.main.temp_max;
+    const tempKMax = params?.main?.temp_max;
     const tempCMax = (tempKMax- 273.15).toFixed(1)
     const tempFMax = ((((tempKMax - 273.15)*(9))/5)+32).toFixed(1)
     
-    const tempKFL = params?.main.feels_like;
+    const tempKFL = params?.main?.feels_like;
     const tempCFL = (tempKFL- 273.15).toFixed(1)
     const tempFFL = ((((tempKFL - 273.15)*(9))/5)+32).toFixed(1)
 
@@ -64,6 +65,7 @@ function App() {
   }
 
   console.log(isCelsius)
+  console.log(weather)
 
   
   return (
@@ -164,7 +166,7 @@ function App() {
                 <h1>Humedad</h1>
               </div>
               <div className='humidity_contain'>
-                <p className='humidity_contain_p1'>{weather?.main.humidity}</p>
+                <p className='humidity_contain_p1'>{(weather?.main?.humidity) ? (weather?.main?.humidity) :'No data'}</p>
                 <p className='humidity_contain_p2'>&nbsp;%</p>
               </div>
               <div className='humidity_bottom'>
@@ -181,8 +183,8 @@ function App() {
                 <h1>Presión</h1>
               </div>
               <div className='pressure_contain'>
-                <p className='pressure_contain_p1'>{weather?.main.pressure}</p>
-                <p className='pressure_contain_p2'>&nbsp;hPa</p>
+                <p className='pressure_contain_p1'>{(weather?.main?.pressure) ? (weather?.main?.pressure) :'No data'}</p>
+                <p className='pressure_contain_p2'>&nbsp;{document.getElementsByClassName('pressure_contain_p2').textContent = 'No data' ? ('hPa') :'hPa'}</p>
               </div>
               <div className='pressure_bottom'>
                 <div className='pressure_bottom_1'><i className="fa-solid fa-ruler-vertical"></i></div>
@@ -198,8 +200,8 @@ function App() {
                 <h1>Precipitación</h1>
               </div>
               <div className='rain_contain'>
-                <p className='rain_contain_p1'>{weather?.rain['1h']}</p>
-                <p className='rain_contain_p2'>&nbsp;mm/h</p>
+                <p className='rain_contain_p1'>{(weather?.rain?.['1h']) ? (weather?.rain['1h']) :'No data'}</p>
+                <p className='rain_contain_p2'>&nbsp;{document.getElementsByClassName('rain_contain_p2').textContent = 'No data' ? ('mm/h') :'mm/h'}</p>
               </div>
               <div className='rain_bottom'>
                 <div className='rain_bottom_1'><i className="fa-solid fa-cloud-showers-heavy"></i></div>
@@ -233,8 +235,8 @@ function App() {
               </div>
               <div className='moderate_wind_contain'>
                 <div className='moderate_wind_contain_data'>
-                  <p className='wind_contain_data_p1'>{weather?.wind.speed}</p>
-                  <p className='wind_contain_data_p2'>m/s</p>
+                  <p className='wind_contain_data_p1'>{(weather?.wind?.speed) ? (weather?.wind?.speed) :'No data'}</p>
+                  <p className='wind_contain_data_p2'>{document.getElementsByClassName('wind_contain_data_p2').textContent = 'No data' ? ('m/s') : ('m/s')}</p>
                 </div>
                 <div className='moderate_wind_contain_generator'>
                   <div className="aero_container_1"></div>
