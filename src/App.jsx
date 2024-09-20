@@ -119,7 +119,7 @@ function App() {
             <div className='title'>
               <p>Estado del clima</p>
             </div>
-            <a className='author' href="https://christianromero.netlify.app/#home" target='_post' >
+            <a className='author' href="https://c-rom.site/" target='_post' >
               <p className='nameAuthor'>Christian R. |&nbsp;</p>
               <div className='profile'></div>
             </a>
@@ -256,7 +256,7 @@ function App() {
           </div>
 
           <div className='container_info_desing'>
-            <p>Diseño UI/UX &nbsp;</p><a href="https://dribbble.com/mikhaltsov23" target='_post'>Dribbble - Anton Mihalcov&nbsp;</a>
+            <p>Diseño UI/UX &nbsp;</p><a href="https://dribbble.com/shots/10460680-Weather-App" target='_post'>Dribbble - Anton Mihalcov&nbsp;</a>
           </div>
         </div>
       </div>
